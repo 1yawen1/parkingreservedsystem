@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+        crossorigin="anonymous"
+    >
+    <link rel="stylesheet" href="{{ url_for('static',    filename='css/style_form.css') }}">
+    <title>成大車位預約-停車位預約結果</title>
+</head>
+<body>
+    <main>
+        <!--NAV-->
+        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark" >
+            <div class="container-fluid">
+            <a class="navbar-brand" href="">Group5 成大預約停車系統</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" onclick="go_P2()">主頁</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" onclick="go_P3()">查看所剩車位</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" onclick="go_P4()">預約車位</a>
+                </li>
+                </ul>
+            </div>
+            </div>
+        </nav>
+    <!--本體-->
+        <div id="outside">
+            <section class="title">
+                <h1 id = "h1_title">車位預約結果</h1>
+            
+            </section>
+            <div class="display_outsideblock">
+                <div class="display_block" >
+                    <div class="display">帳號 : </div>
+                    <div id="name_get" class="display display_get"></div>
+                </div>
+                <br>
+                <div class="display_block">  
+                    <div class="display">密碼 : </div>
+                    <div id="password_get" class="display display_get">></div>
+                </div>
+                <br>
+                <div class="display_block">
+                    <div class="display">車牌 : </div>
+                    <div id="car_get" class="display display_get">></div>
+                </div>
+                <br>
+                <div class="display_block">
+                    <div class="display">停車場 : </div>
+                    <div id="park_get" class="display display_get">></div>
+                </div>
+                <br>
+                <div class="display_block">
+                    <div class="display">預約時間 :</div>
+                    <div id="date_get" class="display display_get">></div>
+                </div>
+                <br>
+                <div id="cancel_buttton" onclick="cancel_book()">取消預約</div>
+            </div>
+        </div>
+    </main>
+</body>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.js"></script>
+<script src="{{ url_for('static',    filename='JS/JS_form.js') }}"></script>
+</html>

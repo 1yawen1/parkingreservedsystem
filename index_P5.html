@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>成功大學停車場預約</title>
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+        crossorigin="anonymous"
+    >
+    <!--<link href="stylep5.css" rel="stylesheet">-->
+    <link rel="stylesheet" href="{{ url_for('static',    filename='css/style_p5.css') }}">
+    
+</head>
+<body class="body" onload="getselect()">
+    <!--NAV-->
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark" >
+        <div class="container-fluid">
+        <a class="navbar-brand" href="">Group5 成大預約停車系統</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" onclick="go_P2()">主頁</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" onclick="go_P3()">查看所剩車位</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" onclick="go_P4()">預約車位</a>
+            </li>
+            </ul>
+        </div>
+        </div>
+    </nav>
+    <!--本體-->
+    <div class="form">
+        <div class="w20">
+            <label class="f3">車牌號碼</label>
+            <input class="f10" type="text" id="user_car" >
+        </div>
+        <br>
+        <div class="w20">
+            <label class="f3">預約停車場</label>
+            <select class="f10 sel" value="" id="select_select">
+                <option selected="selected" id="user_select_park" ></option>
+                <option onload="getselect()" >A 光復前門地下停車場</option>
+                <option>B 管院地下停車場</option>
+                <option>C 雲平地下停車場</option>
+                <option>D 修齊地下停車場</option>
+                <option>E 都計地下停車場</option>
+                <option>F 成功前門地下停車場</option>
+                <option>G 三系館地下停車場</option>
+                <option>H 奇美樓地下停車場</option>
+                <option>I 生科大樓地下停車場</option>
+                <option>J 理學大樓地下停車場</option>
+                <option>1 管院平面</option>
+                <option>2 雲平平面</option>
+                <option>3 新園平面</option>
+                <option>4 土木及水利平面</option>
+                <option>5 自強平面</option>
+                <option>6 勝後平面</option>
+                <option>6 勝後平面</option>
+                <option>7 力行平面</option>
+                <option>8 成杏平面</option>
+            </select>
+        </div>
+        <br>
+        <div class="w20">
+            <label class="f3">預約日期</label>
+            <div class="w10" style="margin-left: 0.5%;">
+                <input type="datetime-local" id="user_park_date"
+                    name="meeting-time" value= ""
+                    min="" max = "">
+                        <script>
+                            date = new Date();
+                            year = date.getFullYear();
+                            month = date.getMonth()+1;
+                            day = date.getDate();
+                            hour = date.getHours();
+                            month = month.toString();
+                            day = day.toString();
+                            hour = ("0" + hour.toString()).slice(-2);
+                            if ((month.length)==1)
+                            {
+                                month = "0" + month;
+                            }
+                            if ((day.length)==1)
+                            {
+                                day = "0" + String(day);
+                            }
+                            document.getElementById("user_park_date").value = year + "-" + month + "-" + day + "T" + hour + ":00";
+                            //設定目前時間
+                            document.getElementById("user_park_date").min = year + "-" + month + "-" + day + "T"+ hour + ":00";
+                            //設定最小期限 只能預約今天 
+                            var max_date = new Date(document.getElementById("user_park_date").value); 
+                            max_date.setDate(max_date.getDate() + 1);  
+                            //抓取最大日期 設定為當前日期多一天
+                            max_year = max_date.getFullYear();
+                            max_month = max_date.getMonth()+1;
+                            max_day = max_date.getDate();
+                            max_hour = max_date.getHours();
+                            max_month = month.toString();
+                            max_day = max_day.toString();
+                            max_hour = ("0" + max_hour.toString()).slice(-2);
+                            console.log(max_month,max_day)
+                            if ((max_month.length)==1)
+                            {
+                                max_month = "0" + max_month;
+                            }
+                            if ((max_day.length)==1)
+                            {
+                                max_day = "0" + String(max_day);
+                            }
+                            // 調整最大日期之格式
+                            document.getElementById("user_park_date").max = max_year + "-" + max_month + "-" + max_day + "T"+ max_hour + ":00";
+                            // 設定最大期限 只能預約明天
+                        </script>
+                <button  onclick="book_park()">送出預約</button>
+            </div>
+            
+        </div>
+        <br>      
+    </div>
+</body>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.js"></script>
+<script src="{{ url_for('static',    filename='JS/JS_P5.js') }}"></script>
+
+</html>
